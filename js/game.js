@@ -24,7 +24,7 @@ var levels = {
         var html = "";
         for(var i=0; i<levels.data.length; i++){
             var level = levels.data[i];
-            html += '<input type="button' value="'+(i+1)+'">';
+            html += '<input type="button"  value="'+(i+1)+'">';
         };
         $('#levelselectscreen input').click(function(){
             levels.load(this.value-1);
@@ -36,6 +36,8 @@ var levels = {
     }
     
 }
+
+
 
 var game = {
     
@@ -51,8 +53,15 @@ var game = {
         $('#gamestartscreen').show();
         
         //Obtener el controlador para el canvas y el contexto del juego
-        game.canvas = document.getElementById('gamecanvas');
+        game.canvas = $('#gamecanvas')[0];
         game.context = game.canvas.getContext('2d');
-    }
+    },
+
+    showLevelScreen:function(){
+		$('.gamelayer').hide(); // Oculta todas las capas del juego
+		$('#levelselectscreen').show('slow'); // Muestra la de level
+	},
+
+
     
 }
