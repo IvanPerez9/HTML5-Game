@@ -37,7 +37,7 @@ var levels = {
     
 }
 
-
+// Mirar cambios en el .js 29/01 
 
 var game = {
     
