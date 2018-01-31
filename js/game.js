@@ -79,7 +79,7 @@ var game = {
 	// La puntuacion del juego.
 	score:0,
 
-	//Desplegar la pantalla para centrarse en newCenter
+	//Desplegar la pantalla para centrarse en newCenter. Primero mueve hacia la derecha para mostrar el objetivo, luego deberia volver.
 	panTo:function(newCenter){
 		if (Math.abs(newCenter-game.offsetLeft-game.canvas.width/4)>0
 			&& game.offsetLeft <= game.maxOffset && game.offsetLeft >= game.minOffset){
@@ -116,7 +116,7 @@ var game = {
         //Anima los personajes
 
         //Dibuja el fondo con un desplazamiento 
-        game.context.drawImage(game.currentLevel.backgroundImage, game.offsetLeft / 4, 0, 640, 480, 0, 0, 640, 480);
+        game.context.drawImage(game.currentLevel.backgroundImage, game.offsetLeft/4, 0, 640, 480, 0, 0, 640, 480);
         game.context.drawImage(game.currentLevel.foregroundImage, game.offsetLeft, 0, 640, 480, 0, 0, 640, 480);
         // Se mueven a diferentes velocidades.
 
@@ -174,10 +174,10 @@ var levels = {
         var level = levels.data[number];
 
         //Cargar el fondo, el primer plano y las imagenes de la honda
-        game.currentLevel.backgroundImage = loader.loadImage("../images/backgrounds/" + level.background + ".png");
-        game.currentLevel.foregroundImage = loader.loadImage("../images/backgrounds/" + level.foreground + ".png");
-        game.slingshotImage = loader.loadImage("../images/slingshot.png");
-        game.slingshotFrontImage = loader.loadImage("../images/slingshot-front.png");
+        game.currentLevel.backgroundImage = loader.loadImage("images/backgrounds/" + level.background + ".png");
+        game.currentLevel.foregroundImage = loader.loadImage("images/backgrounds/" + level.foreground + ".png");
+        game.slingshotImage = loader.loadImage("images/slingshot.png");
+        game.slingshotFrontImage = loader.loadImage("images/slingshot-front.png");
 
         //Llamar a game.start() cuando los assets se hayan cargado
         if (loader.loaded) {
@@ -230,6 +230,9 @@ var loader = {
         audio.addEventListener("canplaythrough", loader.loadImage, false);
         return audio;
     },
+
+    // Carga las imagenes X of Y 
+
     itemLoaded: function () {
         loader.loadedCount++;
         $("#loadingmessage").html('Loaded' + loader.loadedCount + ' of ' + loader.totalCount);
