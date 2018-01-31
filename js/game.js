@@ -70,72 +70,57 @@ var game = {
     },
 
     // Velocidad maxima de fotograma
-	maxSpeed:3,
-	// minimo y maximo de offset
-	minOffset:0,
-	maxOffset:300,
-	// Desplazamiento de panorámica actual
-	offsetLeft:0,
-	// La puntuacion del juego.
-	score:0,
+    maxSpeed: 3,
+    // minimo y maximo de offset
+    minOffset: 0,
+    maxOffset: 300,
+    // Desplazamiento de panorámica actual
+    offsetLeft: 0,
+    // La puntuacion del juego.
+    score: 0,
 
-	//Desplegar la pantalla para centrarse en newCenter. Primero mueve hacia la derecha para mostrar el objetivo, luego deberia volver.
-	panTo:function(newCenter){
-		if (Math.abs(newCenter-game.offsetLeft-game.canvas.width/4)>0
-			&& game.offsetLeft <= game.maxOffset && game.offsetLeft >= game.minOffset){
+    //Desplegar la pantalla para centrarse en newCenter. Primero mueve hacia la derecha para mostrar el objetivo, luego deberia volver.
+    panTo: function (newCenter) {
+        if (Math.abs(newCenter - game.offsetLeft - game.canvas.width / 4) > 0
+            && game.offsetLeft <= game.maxOffset && game.offsetLeft >= game.minOffset) {
 
-			var deltaX = Math.round((newCenter-game.offsetLeft-game.canvas.width/4)/2);
-			if (deltaX && Math.abs(deltaX)>game.maxSpeed){
-				deltaX = game.maxSpeed*Math.abs(deltaX)/(deltaX);
-			}
-			game.offsetLeft += deltaX;
-		} else {
+            var deltaX = Math.round((newCenter - game.offsetLeft - game.canvas.width / 4) / 2);
+            if (deltaX && Math.abs(deltaX) > game.maxSpeed) {
+                deltaX = game.maxSpeed * Math.abs(deltaX) / (deltaX);
+            }
+            game.offsetLeft += deltaX;
+        } else {
 
-			return true;
-		}
-		if (game.offsetLeft < game.minOffset){
-			game.offsetLeft = game.minOffset;
-			return true;
-		} else if (game.offsetLeft > game.maxOffset){
-			game.offsetLeft = game.maxOffset;
-			return true;
-		}
-		return false;
+            return true;
+        }
+        if (game.offsetLeft < game.minOffset) {
+            game.offsetLeft = game.minOffset;
+            return true;
+        } else if (game.offsetLeft > game.maxOffset) {
+            game.offsetLeft = game.maxOffset;
+            return true;
+        }
+        return false;
     },
-    
-    handlePanning: function () {
-        game.offsetLeft++; // Marca de posicion temporal, mantiene la panoramica a la derecha
-        if(game.mode =="intro"){
-            if(game.panTo(700)){
-                game.mode = "load-next-hero";
-            }
-        }
-        if(game.mode =="wait-for-firing"){
-            if(mouse.dragging){
-                game.panTo(mouse.x + game.offsetLeft)
-            }else{
-                game.panTo(game.slingshotX);
-            }
-        }
 
-        if(game.mode=="load-next-hero"){
+    handlePanning: function () {
+        if (game.mode == "intro") {
+            if (game.panTo(700)) { game.mode = "load-next-hero"; }
+        }
+        if (game.mode == "wait-for-firing") { if (mouse.dragging) { game.panTo(mouse.x + game.offsetLeft) } else { game.panTo(game.slingshotX); } }
+        if (game.mode == "load-next-hero") {        
             //TODO
             // comprobar si algun villano esta vivo, si no, terminar el nivel exito
             // Comprobar si quedan más heroes para cargar, si no terminar el nivel
-            // Cargar el heroe y fijar a modo de espera para disparar
+            // Cargar el heroe y fijar a modo de espera para disparar     
             game.mode = "wait-for-firing";
         }
-
-        if(game.mode == "firing"){
-            game.panTo(game.slingshotX);
-        }
-
-        if(game.mode == "fired"){
+        if (game.mode == "firing") { game.panTo(game.slingshotX); }
+        if (game.mode == "fired") {         
             //Todo
             //Hacer una panoramica donde quiera que el heroe se encuentre actualmente
         }
-    }, // Errata en las diapos 
-
+    },
     animate: function () {
         //Anima el fondo
         game.handlePanning();
@@ -143,7 +128,7 @@ var game = {
         //Anima los personajes
 
         //Dibuja el fondo con un desplazamiento 
-        game.context.drawImage(game.currentLevel.backgroundImage, game.offsetLeft/4, 0, 640, 480, 0, 0, 640, 480);
+        game.context.drawImage(game.currentLevel.backgroundImage, game.offsetLeft / 4, 0, 640, 480, 0, 0, 640, 480);
         game.context.drawImage(game.currentLevel.foregroundImage, game.offsetLeft, 0, 640, 480, 0, 0, 640, 480);
         // Se mueven a diferentes velocidades.
 
@@ -155,9 +140,6 @@ var game = {
             game.animationFrame = window.requestAnimationFrame(game.animate, game.canvas);
         }
     }
-
-
-
 }
 
 //Objeto levels
@@ -277,37 +259,37 @@ var loader = {
 }
 
 var mouse = {
-	x:0,
-	y:0,
-    down:false,
+    x: 0,
+    y: 0,
+    down: false,
     // Fija los elementos para cuando se mueve, o presiones.
-	init:function(){
-		$('#gamecanvas').mousemove(mouse.mousemovehandler);
-		$('#gamecanvas').mousedown(mouse.mousedownhandler);
-		$('#gamecanvas').mouseup(mouse.mouseuphandler);
-		$('#gamecanvas').mouseout(mouse.mouseuphandler);
+    init: function () {
+        $('#gamecanvas').mousemove(mouse.mousemovehandler);
+        $('#gamecanvas').mousedown(mouse.mousedownhandler);
+        $('#gamecanvas').mouseup(mouse.mouseuphandler);
+        $('#gamecanvas').mouseout(mouse.mouseuphandler);
     },
     // Calcula las coordenadas X e Y del raton respecto a la esquina superior izquierda
-	mousemovehandler:function(ev){
-		var offset = $('#gamecanvas').offset();
+    mousemovehandler: function (ev) {
+        var offset = $('#gamecanvas').offset();
 
-		mouse.x = ev.pageX - offset.left;
-		mouse.y = ev.pageY - offset.top;
+        mouse.x = ev.pageX - offset.left;
+        mouse.y = ev.pageY - offset.top;
 
-		if (mouse.down) {
-			mouse.dragging = true;
-		}
+        if (mouse.down) {
+            mouse.dragging = true;
+        }
     },
     // Almacena la ubicacion de donde está el raton.
-	mousedownhandler:function(ev){
-		mouse.down = true;
-		mouse.downX = mouse.x;
-		mouse.downY = mouse.y;
-		ev.originalEvent.preventDefault();
+    mousedownhandler: function (ev) {
+        mouse.down = true;
+        mouse.downX = mouse.x;
+        mouse.downY = mouse.y;
+        ev.originalEvent.preventDefault();
 
-	},
-	mouseuphandler:function(ev){
-		mouse.down = false;
-		mouse.dragging = false;
-	}
+    },
+    mouseuphandler: function (ev) {
+        mouse.down = false;
+        mouse.dragging = false;
+    }
 }
