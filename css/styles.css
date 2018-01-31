@@ -63,8 +63,8 @@
 
 #scorescreen img{
     opacity: 0.6;
-    top:109px;
-    position: absolute;
+    top:10px;
+    position: relative;
     padding-left: 10px;
     cursor: pointer;
 }

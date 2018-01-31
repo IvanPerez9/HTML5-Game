@@ -93,7 +93,7 @@ var game = {
 
 			return true;
 		}
-		if (game.offsetLeft <game.minOffset){
+		if (game.offsetLeft < game.minOffset){
 			game.offsetLeft = game.minOffset;
 			return true;
 		} else if (game.offsetLeft > game.maxOffset){
@@ -103,10 +103,37 @@ var game = {
 		return false;
     },
     
-    // ESTO LO CAMBIO !!!!! ??? ?
-    
     handlePanning: function () {
         game.offsetLeft++; // Marca de posicion temporal, mantiene la panoramica a la derecha
+        if(game.mode =="intro"){
+            if(game.panTo(700)){
+                game.mode = "load-next-hero";
+            }
+        }
+        if(game.mode =="wait-for-firing"){
+            if(mouse.dragging){
+                game.panTo(mouse.x + game.offsetLeft)
+            }else{
+                game.panTo(game.slingshotX);
+            }
+        }
+
+        if(game.mode=="load-next-hero"){
+            //TODO
+            // comprobar si algun villano esta vivo, si no, terminar el nivel exito
+            // Comprobar si quedan más heroes para cargar, si no terminar el nivel
+            // Cargar el heroe y fijar a modo de espera para disparar
+            game.mode = "wait-for-firing";
+        }
+
+        if(game.mode == "firing"){
+            game.panTo(game.slingshotX);
+        }
+
+        if(game.mode == "fired"){
+            //Todo
+            //Hacer una panoramica donde quiera que el heroe se encuentre actualmente
+        }
     }, // Errata en las diapos 
 
     animate: function () {
