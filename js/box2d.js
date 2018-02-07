@@ -18,4 +18,29 @@ function init(){
     var allowSleep = true; // Permite a los objetos estar en reposo
 
     world = new b2World(gravity,allowSleep);
+
+    createFloor();
+}
+
+function createFloor(){
+    // Una deficnicion body que tiene todos los datos necesarios para contruir un cuerpo rigido 
+    var bodyDef = new b2BodyDef;
+    bodyDef.type = b2Body.b2_staticBody;
+    bodyDef.position.x = 640/2/scale;
+    bodyDef.position.y = 450/scale;
+
+    // Un accesorio se utiliza para unir una forma a un cuerpo para la deteccion de colision
+    // La deficion de un accesorio se utiliza para crear un fixture 
+    var fixtureDef = new b2FixtureDef;
+    fixtureDef.density = 1.0; // Peso del cuerpo
+    fixtureDef.friction = 0.5; // El cuerpo escurre de forma realista
+    fixtureDef.restitucion = 0.2; // Que el cuerpo rebote (0 nada y 1 muy elástica)
+    
+    fixtureDef.shape = new b2PolygonShape;
+    fixtureDef.shape.SetAsBox(320/scale, 10/scale); // 640 de ancho por 20 de alto
+    // Escala variable para crear de pixeles a metros 
+
+    var body = world.CreateBody(bodyDef);
+    var fixture = body.CreateFixture(fixtureDef);
+
 }
