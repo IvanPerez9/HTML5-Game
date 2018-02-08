@@ -24,6 +24,8 @@ function init(){
     createRectangularBody();
     createCircularBody();
     createSimplePolyonBody();
+    //Crear un cuerpo combinado de dos formas
+    createComplexBody();
 
     setupDebugDraw();
     animate(); // 105 
@@ -153,3 +155,34 @@ function createSimplePolyonBody(){
 
     var fixture = body.CreateFixture(fixtureDef);
 }
+
+function createComplexBody(){
+    var bodyDef = new b2BodyDef;
+    bodyDef.type = b2Body.b2_dynamicBody;
+    bodyDef.position.x = 350/scale;
+    bodyDef.position.y = 50/scale;
+    var body = world.CreateBody(bodyDef);
+
+    //Crear el primer accesorio y añdir una forma circular al cuerpo
+    var fixtureDef = new b2FixtureDef;
+    fixtureDef.density = 1.0;
+    fixtureDef.friction = 0.5;
+    fixtureDef.restitution = 0.7;
+    fixtureDef.shape = new b2CircleShape(40/scale);
+    body.CreateFixture(fixtureDef);
+
+    //Crear el segundo accesorio y añadir una forma poligonal al cuerpo
+    fixtureDef.shape = new b2PolygonShape;
+    var points = [
+        new b2Vec2(0,0),
+        new b2Vec2(40/scale,50/scale),
+        new b2Vec2(50/scale,100/scale),
+        new b2Vec2(-50/scale,100/scale),
+        new b2Vec2(-40/scale,50/scale),
+    ];
+
+    fixtureDef.shape.SetAsArray(points,points.length);
+    body.CreateFixture(fixtureDef);
+}
+
+// 126 
