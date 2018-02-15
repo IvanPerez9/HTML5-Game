@@ -450,6 +450,34 @@ var levels = {
                 { type: "hero", name: "orange", x: 80, y: 405 },
                 { type: "hero", name: "apple", x: 140, y: 405 },
             ]
+        },
+        {   // Tercer nivel
+            foreground: 'shakuraBG',
+            background: 'shakuraBG',
+            entities: [
+                { type: "ground", name: "dirt", x: 500, y: 440, width: 1000, height: 20, isStatic: true },
+                { type: "ground", name: "wood", x: 185, y: 390, width: 30, height: 80, isStatic: true },
+
+                // Empieza por delante los paneles 
+                // Todos mismos sitio alineados
+                { type: "block", name: "wood", x: 620, y: 380, angle: 90, width: 100, height: 25 },
+                { type: "block", name: "glass", x: 620, y: 280, angle: 90, width: 100, height: 25 },
+                { type: "block", name: "glass", x: 620, y: 180, angle: 90, width: 90, height: 25 },
+                // Uno depie largo
+                { type: "block", name: "glass", x: 710, y: 380, angle: 90, width: 150, height: 35 },
+                // Uno tumbado para poner un villano encima , sin angulo
+                { type: "block", name: "wood", x: 770, y: 380, width: 100, height: 25 },
+
+                //Coloco los villanos
+                { type: "villain", name: "sodaglass", x: 710, y: 280, calories: 20 },
+                { type: "villain", name: "cupcake", x: 666, y: 405, calories: 520 },
+                { type: "villain", name: "Donut", x: 780, y: 360, calories: 250 },
+
+                
+                { type: "hero", name: "coconut", x: 30, y: 415 },
+                { type: "hero", name: "watermelon", x: 80, y: 405 },
+                
+            ]
         }
     ],
 
@@ -502,7 +530,7 @@ var levels = {
         }
     }
 }
-
+// Definir entidades 
 var entities = {
     definitions: {
         "glass": {
@@ -566,6 +594,55 @@ var entities = {
             shape: "circle",
             radius: 15,
             density: 2.0,
+            friction: 0.5,
+            restitution: 0.4,
+        },
+        // Nuevas entidades definidas
+        "coconut": {
+            shape: "circle",
+            radius: 25,
+            density: 1.5,
+            friction: 0.5,
+            restitution: 0.5,
+        },
+        "pineapple": {
+            shape: "rectangle",
+            fullHealth: 50,
+            width: 40,
+            height: 50,
+            density: 1,
+            friction: 0.5,
+            restitution: 0.6,
+        },
+        "watermelon": {
+            shape: "circle",
+            radius: 30,
+            density: 1.5,
+            friction: 0.5,
+            restitution: 0.4,
+        },
+        "sodaglass": {
+            shape: "rectangle",
+            fullHealth: 80,
+            width: 40,
+            height: 60,
+            density: 1,
+            friction: 0.5,
+            restitution: 0.7,
+        },
+        "cupcake": {
+            shape: "circle",
+            fullHealth: 40,
+            radius: 25,
+            density: 1,
+            friction: 0.5,
+            restitution: 0.4,
+        },
+        "Donut": {
+            shape: "circle",
+            fullHealth: 40,
+            radius: 25,
+            density: 1,
             friction: 0.5,
             restitution: 0.4,
         },
