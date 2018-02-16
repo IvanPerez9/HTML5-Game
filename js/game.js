@@ -451,7 +451,7 @@ var levels = {
                 { type: "hero", name: "apple", x: 140, y: 405 },
             ]
         },
-        {   // Tercer nivel
+        {   // Tercer nivel. Shakura Lvl 
             foreground: 'shakuraBG',
             background: 'shakuraBG',
             entities: [
@@ -467,16 +467,52 @@ var levels = {
                 { type: "block", name: "glass", x: 710, y: 380, angle: 90, width: 150, height: 35 },
                 // Uno tumbado para poner un villano encima , sin angulo
                 { type: "block", name: "wood", x: 770, y: 380, width: 100, height: 25 },
+                //Ultimo para impedir que el donut nuede
+                { type: "block", name: "glass", x: 840, y: 380, angle: 90, width: 100, height: 15 },
 
                 //Coloco los villanos
                 { type: "villain", name: "sodaglass", x: 710, y: 280, calories: 20 },
                 { type: "villain", name: "cupcake", x: 666, y: 405, calories: 520 },
                 { type: "villain", name: "Donut", x: 780, y: 360, calories: 250 },
 
-                
                 { type: "hero", name: "coconut", x: 30, y: 415 },
                 { type: "hero", name: "watermelon", x: 80, y: 405 },
+                { type: "hero", name: "pear", x: 140, y: 405 },
                 
+            ]
+        },
+
+        {   // Cuarto nivel. Strawberry lvl  
+            foreground: '1',
+            background: '1',
+            entities: [
+                //Modificar el suelo
+                { type: "ground", name: "dirt", x: 500, y: 440, width: 1000, height: 20, isStatic: true },
+                { type: "ground", name: "wood", x: 185, y: 390, width: 30, height: 80, isStatic: true },
+
+                // Empieza por delante los paneles 
+                // Uno de madera y encima de cristal, y el villano encima de esto
+                //Coloco villanos a la vez en su puesto
+                { type: "block", name: "wood", x: 510, y: 280, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "glass", x: 510, y: 220, width: 100, height: 25 },
+                { type: "villain", name: "cupcake", x: 510, y: 210, calories: 120 },
+                //Otro
+                { type: "block", name: "wood", x: 620, y: 380, angle: 90, width: 100, height: 15 },
+                { type: "block", name: "glass", x: 620, y: 320, width: 100, height: 25 },
+                { type: "villain", name: "pizza", x: 620, y: 310, calories: 180 },
+                //Otro más 
+                { type: "block", name: "wood", x: 720, y: 280, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "glass", x: 720, y: 220, width: 100, height: 25 },
+                { type: "villain", name: "Donut", x: 720, y: 210, calories: 190 },
+                //Otro más alto
+                { type: "block", name: "wood", x: 820, y: 280, angle: 90, width: 140, height: 15 },
+                { type: "block", name: "glass", x: 820, y: 220, width: 100, height: 25 },
+                { type: "villain", name: "fries", x: 820, y: 210, calories: 130 },
+                
+                // Coloco heroes, todo fresas
+                { type: "hero", name: "strawberry", x: 30, y: 415 },
+                { type: "hero", name: "strawberry", x: 80, y: 405 },
+                { type: "hero", name: "strawberry", x: 140, y: 405 },
             ]
         }
     ],
@@ -484,9 +520,10 @@ var levels = {
     // Seleccion de nivel
     init: function () {
         var html = "";
+        var words = ["Desert" , "Desert" , "Shakura" , "Strawberries"];
         for (var i = 0; i < levels.data.length; i++) {
             var level = levels.data[i];
-            html += '<input type="button" value="' + (i + 1) + '">';
+            html += '<input type="button" value="' + (i + 1)+'-'+ words[i] + ' ">';
         };
         $('#levelselectscreen').html(html);
 
@@ -614,6 +651,13 @@ var entities = {
             friction: 0.5,
             restitution: 0.6,
         },
+        "pear": {
+            shape: "circle",
+            radius: 25,
+            density: 1.5,
+            friction: 0.5,
+            restitution: 0.4,
+        },
         "watermelon": {
             shape: "circle",
             radius: 30,
@@ -645,6 +689,15 @@ var entities = {
             density: 1,
             friction: 0.5,
             restitution: 0.4,
+        },
+        "pizza": {
+            shape: "rectangle",
+            fullHealth: 50,
+            width: 40,
+            height: 50,
+            density: 1,
+            friction: 0.5,
+            restitution: 0.6,
         },
     },
     // Tomar la entidad crear un cuerpo Box2D y añadirlo al mundo
