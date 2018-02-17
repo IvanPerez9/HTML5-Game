@@ -426,8 +426,8 @@ var levels = {
             ]
         },
         {   // Segundo nivel
-            foreground: 'desert-foreground',
-            background: 'clouds-background',
+            foreground: 'Egip_BG',
+            background: 'Egip_BG',
             entities: [
                 { type: "ground", name: "dirt", x: 500, y: 440, width: 1000, height: 20, isStatic: true },
                 { type: "ground", name: "wood", x: 185, y: 390, width: 30, height: 80, isStatic: true },
@@ -483,8 +483,41 @@ var levels = {
         },
 
         {   // Cuarto nivel. Strawberry lvl  
-            foreground: '1',
-            background: '1',
+            foreground: 'backgroundDefault',
+            background: 'backgroundDefault',
+            entities: [
+                //Modificar el suelo
+                { type: "ground", name: "dirt", x: 500, y: 440, width: 1000, height: 20, isStatic: true },
+                { type: "ground", name: "wood", x: 185, y: 390, width: 30, height: 80, isStatic: true },
+
+                // Empieza por delante los paneles 
+                // Uno de madera y encima de cristal, y el villano encima de esto
+                //Coloco villanos a la vez en su puesto
+                { type: "block", name: "wood", x: 510, y: 280, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "glass", x: 510, y: 220, width: 100, height: 25 },
+                { type: "villain", name: "cupcake", x: 510, y: 210, calories: 120 },
+                //Otro
+                { type: "block", name: "wood", x: 620, y: 380, angle: 90, width: 100, height: 15 },
+                { type: "block", name: "glass", x: 620, y: 320, width: 100, height: 25 },
+                { type: "villain", name: "pizza", x: 620, y: 310, calories: 180 },
+                //Otro más 
+                { type: "block", name: "wood", x: 720, y: 280, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "glass", x: 720, y: 220, width: 100, height: 25 },
+                { type: "villain", name: "Donut", x: 720, y: 210, calories: 190 },
+                //Otro más alto
+                { type: "block", name: "wood", x: 820, y: 280, angle: 90, width: 140, height: 15 },
+                { type: "block", name: "glass", x: 820, y: 220, width: 100, height: 25 },
+                { type: "villain", name: "fries", x: 820, y: 210, calories: 130 },
+                
+                // Coloco heroes, todo fresas
+                { type: "hero", name: "strawberry", x: 30, y: 415 },
+                { type: "hero", name: "strawberry", x: 80, y: 405 },
+                { type: "hero", name: "strawberry", x: 140, y: 405 },
+            ]
+        },
+        {   // Quinto nivel  cocos ??????
+            foreground: 'snow_mountain_FG',
+            background: 'cloud_sky_BG',
             entities: [
                 //Modificar el suelo
                 { type: "ground", name: "dirt", x: 500, y: 440, width: 1000, height: 20, isStatic: true },
@@ -520,10 +553,9 @@ var levels = {
     // Seleccion de nivel
     init: function () {
         var html = "";
-        var words = ["Desert" , "Desert" , "Shakura" , "Strawberries"];
         for (var i = 0; i < levels.data.length; i++) {
             var level = levels.data[i];
-            html += '<input type="button" value="' + (i + 1)+'-'+ words[i] + ' ">';
+            html += '<input type="button" value="' + (i + 1)+ ' ">';
         };
         $('#levelselectscreen').html(html);
 
