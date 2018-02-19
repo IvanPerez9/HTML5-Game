@@ -56,7 +56,9 @@ var game = {
         game.bounceSound = loader.loadSound('audio/bounce');
         game.breakSound = {
             "glass": loader.loadSound('audio/glassbreak'),
-            "wood": loader.loadSound('audio/woodbreak')
+            "wood": loader.loadSound('audio/woodbreak'),
+            "rock":loader.loadSound('audio/rockbreak')
+            // CARL AQUI AUDIO PARA LA ROCA
         };
 
 
@@ -103,6 +105,25 @@ var game = {
         game.lastUpdateTime = undefined;
         levels.load(game.currentLevel.number + 1);
     },
+    /*
+    goBacktoLvl: function(){
+        /*
+        window.cancelAnimationFrame(game.animationFrame);
+        game.lastUpdateTime = undefined;
+        $('.gamelayer').hide();
+        $('#levelselectscreen').show('slow');
+        var toggleImage = $("#togglemusic")[0];
+        if (game.backgroundMusic.paused) {
+            game.backgroundMusic.play();
+            toggleImage.src = "images/icons/sound.png";
+        } else {
+            game.backgroundMusic.pause();
+            $("#togglemusic")[0].src = "images/icons/nosound.png";
+        }
+        
+    }
+    */
+
     // Modo Game
     mode: "intro",
     // Coordenadas de la honda 
@@ -451,6 +472,7 @@ var levels = {
                 { type: "hero", name: "apple", x: 140, y: 405 },
             ]
         },
+        // CARL NIVELES AÑADIDOS 
         {   // Tercer nivel. Shakura Lvl 
             foreground: 'shakuraBG',
             background: 'shakuraBG',
@@ -516,36 +538,40 @@ var levels = {
             ]
         },
         {   // Quinto nivel  cocos ??????
-            foreground: 'snow_mountain_FG',
-            background: 'cloud_sky_BG',
+            foreground: 'GrassBG',
+            background: 'GrassBG',
             entities: [
                 //Modificar el suelo
-                { type: "ground", name: "dirt", x: 500, y: 440, width: 1000, height: 20, isStatic: true },
+                { type: "ground", name: "dirt", x: 500, y: 440, width: 1000, height: 50, isStatic: true },
                 { type: "ground", name: "wood", x: 185, y: 390, width: 30, height: 80, isStatic: true },
 
                 // Empieza por delante los paneles 
                 // Uno de madera y encima de cristal, y el villano encima de esto
-                //Coloco villanos a la vez en su puesto
-                { type: "block", name: "wood", x: 510, y: 280, angle: 90, width: 50, height: 15 },
-                { type: "block", name: "glass", x: 510, y: 220, width: 100, height: 25 },
-                { type: "villain", name: "cupcake", x: 510, y: 210, calories: 120 },
-                //Otro
-                { type: "block", name: "wood", x: 620, y: 380, angle: 90, width: 100, height: 15 },
-                { type: "block", name: "glass", x: 620, y: 320, width: 100, height: 25 },
-                { type: "villain", name: "pizza", x: 620, y: 310, calories: 180 },
-                //Otro más 
-                { type: "block", name: "wood", x: 720, y: 280, angle: 90, width: 50, height: 15 },
-                { type: "block", name: "glass", x: 720, y: 220, width: 100, height: 25 },
-                { type: "villain", name: "Donut", x: 720, y: 210, calories: 190 },
-                //Otro más alto
-                { type: "block", name: "wood", x: 820, y: 280, angle: 90, width: 140, height: 15 },
-                { type: "block", name: "glass", x: 820, y: 220, width: 100, height: 25 },
-                { type: "villain", name: "fries", x: 820, y: 210, calories: 130 },
-                
+                { type: "block", name: "rock", x: 410, y: 350, angle: 90, width: 80, height: 25 },
+                { type: "block", name: "rock", x: 510, y: 350, angle: 90, width: 80, height: 25 },
+                { type: "block", name: "rock", x: 610, y: 350, angle: 90, width: 80, height: 25 },
+                { type: "block", name: "rock", x: 710, y: 350, angle: 90, width: 80, height: 25 },
+                { type: "block", name: "rock", x: 810, y: 350, angle: 90, width: 80, height: 25 },
+                //Nivel 2 del castillo
+                { type: "block", name: "rock", x: 510, y: 280, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "rock", x: 610, y: 280, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "rock", x: 710, y: 280, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "wood", x: 610, y: 250,  width: 300, height: 15 },
+                // Tercer nivel del castillo 
+                { type: "block", name: "rock", x: 580, y: 210, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "rock", x: 670, y: 210, angle: 90, width: 50, height: 15 },
+                                
+                //Villano arriba
+                { type: "villain", name: "sodaglass", x: 520, y: 210, calories: 130 },
+                { type: "villain", name: "cupcake", x: 720, y: 210, calories: 190 },
+                { type: "villain", name: "burger", x: 620, y: 210, calories: 240 },
+                //Villanos abajo
+                { type: "villain", name: "fries", x: 560, y: 380, calories: 130 },
+                { type: "villain", name: "sodacan", x: 660, y: 380, calories: 130 },
+
                 // Coloco heroes, todo fresas
-                { type: "hero", name: "strawberry", x: 30, y: 415 },
+                { type: "hero", name: "coconut", x: 30, y: 415 },
                 { type: "hero", name: "strawberry", x: 80, y: 405 },
-                { type: "hero", name: "strawberry", x: 140, y: 405 },
             ]
         }
     ],
@@ -603,16 +629,23 @@ var levels = {
 var entities = {
     definitions: {
         "glass": {
-            fullHealth: 100,
+            fullHealth: 200,
             density: 2.4,
             friction: 0.4,
             restitution: 0.15,
         },
         "wood": {
-            fullHealth: 500,
+            fullHealth:900,
             density: 0.7,
             friction: 0.4,
             restitution: 0.4,
+        },
+        // ROCA AÑADIDA NUEVA CARL 
+        "rock":{
+            fullHealth:8000,
+            density:20,
+            friction:0.4,
+            restitution:0,
         },
         "dirt": {
             density: 3.0,
@@ -666,6 +699,7 @@ var entities = {
             friction: 0.5,
             restitution: 0.4,
         },
+        // CARL ENTIDADES NUEVAS 
         // Nuevas entidades definidas
         "coconut": {
             shape: "circle",
@@ -1024,66 +1058,6 @@ var loader = {
     }
 };
 
-/*
-var loader = {
-	loaded:true,
-	loadedCount:0, // Assets that have been loaded so far
-	totalCount:0, // Total number of assets that need to be loaded
-
-	init:function(){
-		// check for sound support
-		var mp3Support,oggSupport;
-		var audio = document.createElement('audio');
-		if (audio.canPlayType) {
-	   		// Currently canPlayType() returns: "", "maybe" or "probably"
-	  		mp3Support = "" != audio.canPlayType('audio/mpeg');
-	  		oggSupport = "" != audio.canPlayType('audio/ogg; codecs="vorbis"');
-		} else {
-			//The audio tag is not supported
-			mp3Support = false;
-			oggSupport = false;
-		}
-
-		// Check for ogg, then mp3, and finally set soundFileExtn to undefined
-		loader.soundFileExtn = oggSupport?".ogg":mp3Support?".mp3":undefined;
-	},
-
-	loadImage:function(url){
-		this.totalCount++;
-		this.loaded = false;
-		$('#loadingscreen').show();
-		var image = new Image();
-		image.src = url;
-		image.onload = loader.itemLoaded;
-		return image;
-	},
-	soundFileExtn:".ogg",
-	loadSound:function(url){
-		this.totalCount++;
-		this.loaded = false;
-		$('#loadingscreen').show();
-		var audio = new Audio();
-		audio.src = url+loader.soundFileExtn;
-		audio.addEventListener("canplaythrough", loader.itemLoaded, false);
-		return audio;
-	},
-	itemLoaded:function(){
-		loader.loadedCount++;
-		$('#loadingmessage').html('Loaded '+loader.loadedCount+' of '+loader.totalCount);
-		if (loader.loadedCount === loader.totalCount){
-			// Loader has loaded completely..
-			loader.loaded = true;
-			// Hide the loading screen
-			$('#loadingscreen').hide();
-			//and call the loader.onload method if it exists
-			if(loader.onload){
-				loader.onload();
-				loader.onload = undefined;
-			}
-		}
-	}
-}
-*/
 var mouse = {
     x: 0,
     y: 0,
