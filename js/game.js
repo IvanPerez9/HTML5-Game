@@ -127,8 +127,6 @@ var game = {
         game.animationFrame = window.requestAnimationFrame(game.animate, game.canvas);
     },
 
-
-
     // Velocidad maxima de fotograma
     maxSpeed: 3,
     // minimo y maximo de offset
@@ -542,16 +540,16 @@ var levels = {
                 { type: "block", name: "rock", x: 710, y: 280, angle: 90, width: 50, height: 15 },
                 { type: "block", name: "wood", x: 610, y: 250,  width: 300, height: 15 },
                 // Tercer nivel del castillo 
-                { type: "block", name: "rock", x: 580, y: 210, angle: 90, width: 50, height: 15 },
-                { type: "block", name: "rock", x: 670, y: 210, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "rock", x: 580, y: 215, angle: 90, width: 50, height: 15 },
+                { type: "block", name: "rock", x: 670, y: 215, angle: 90, width: 50, height: 15 },
                                 
                 //Villano arriba
-                { type: "villain", name: "sodaglass", x: 520, y: 210, calories: 130 },
-                { type: "villain", name: "cupcake", x: 720, y: 210, calories: 190 },
-                { type: "villain", name: "burger", x: 620, y: 210, calories: 240 },
+                { type: "villain", name: "sodaglass", x: 520, y: 215, calories: 130 },
+                { type: "villain", name: "fries", x: 720, y: 215, calories: 190 },
+                { type: "villain", name: "sodacan", x: 620, y: 215, calories: 240 },
                 //Villanos abajo
-                { type: "villain", name: "fries", x: 560, y: 380, calories: 130 },
-                { type: "villain", name: "sodacan", x: 660, y: 380, calories: 130 },
+                { type: "villain", name: "burger", x: 560, y: 380, calories: 130 },
+                { type: "villain", name: "cupcake", x: 660, y: 380, calories: 130 },
 
                 // Coloco heroes, todo fresas
                 { type: "hero", name: "coconut", x: 30, y: 415 },
