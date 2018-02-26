@@ -92,10 +92,12 @@ var game = {
         }
     },
     showLevelScreen: function () {
+        this.stopBackgroundMusic();
         $('.gamelayer').hide();
         $('#levelselectscreen').show('slow');
     },
     restartLevel: function () {
+        this.stopBackgroundMusic();
         window.cancelAnimationFrame(game.animationFrame);
         game.lastUpdateTime = undefined;
         levels.load(game.currentLevel.number);
@@ -105,24 +107,6 @@ var game = {
         game.lastUpdateTime = undefined;
         levels.load(game.currentLevel.number + 1);
     },
-    /*
-    goBacktoLvl: function(){
-        /*
-        window.cancelAnimationFrame(game.animationFrame);
-        game.lastUpdateTime = undefined;
-        $('.gamelayer').hide();
-        $('#levelselectscreen').show('slow');
-        var toggleImage = $("#togglemusic")[0];
-        if (game.backgroundMusic.paused) {
-            game.backgroundMusic.play();
-            toggleImage.src = "images/icons/sound.png";
-        } else {
-            game.backgroundMusic.pause();
-            $("#togglemusic")[0].src = "images/icons/nosound.png";
-        }
-        
-    }
-    */
 
     // Modo Game
     mode: "intro",
@@ -590,6 +574,13 @@ var levels = {
             levels.load(this.value - 1);
             $('#levelselectscreen').hide();
         });
+
+        $('#goBackbtn input').click(function () {
+            $('#levelselectscreen').hide();
+            $('.gamelayer').show('slow');
+        });
+
+
     },
 
     // Carga todos los datos e imagenes para un nivel especifico
