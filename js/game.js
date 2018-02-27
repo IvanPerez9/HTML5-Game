@@ -107,6 +107,14 @@ var game = {
         game.lastUpdateTime = undefined;
         levels.load(game.currentLevel.number + 1);
     },
+    // CARL AQUI, Funcion en los niveles para poder salir 
+    goBack: function(){
+        this.stopBackgroundMusic();
+        window.cancelAnimationFrame(game.animationFrame);
+		game.lastUpdateTime = undefined;
+		game.ended = true;
+		game.showLevelScreen();
+    },
 
     // Modo Game
     mode: "intro",

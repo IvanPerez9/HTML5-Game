@@ -32,9 +32,11 @@
 #levelselectscreen input{
     margin:20px;
     cursor: pointer;
-    background: url(../images/icons/level.png) no-repeat;
-    color:yellow;
-    font-size: 20px;
+    background: url(../images/icons/btnBanana.png) no-repeat;
+    font-family: Arial, Helvetica, sans-serif;
+    color:red;
+    font-weight: bold;
+    font-size: 23px;
     width: 64px;
     height: 64px;
     border: 0;
